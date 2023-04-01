@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /* color */
+  --blue-100: hsl(195, 74%, 62%);
+  --blue-200: hsl(236, 100%, 87%);
+  --blue-300: hsl(235, 45%, 61%);
+  --blue-400: hsl(246, 80%, 60%);
+  --blue-500: hsl(235, 46%, 20%);
+  --blue-600: hsl(226, 43%, 10%);
+  --red-100: hsl(15, 100%, 70%);
+  --red-200: hsl(348, 100%, 68%);
+  --green-100: hsl(145, 58%, 55%);
+  --violet-100: hsl(264, 64%, 52%);
+  --orange-100: hsl(43, 84%, 65%);
+
+  /* typography  */
+  --family: 'Rubik', sans-serif;
+  --fs-base: 18px;
+  --weight-light: 300;
+  --weight-normal: 400;
+  --weight-bold: 500;
+
+  /* borders */
+  --radii: 1rem;
+}
+
+body {
+  margin: 0;
+  background-color: var(--blue-600);
+
+  font-family: var(--family);
+  font-size: var(--fs-base);
+  color: white;
+}
+
+.dashboard {
+  min-height: 100vh;
+  padding: 4rem 0.5rem;
+}
+
+.dashboard__content {
+  width: 100%;
+  max-width: 1440px;
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+
+.dashboard__person {
+  width: 100%;
+  background-color: var(--blue-500);
+  border-radius: var(--radii);
+}
+
+.info-card {
+  background-color: var(--blue-400);
+  border-radius: var(--radii);
+  display: flex;
+  justify-content: center;
+}
+.info-card__photo {
+  width: 50px;
+  height: 50px;
+}
