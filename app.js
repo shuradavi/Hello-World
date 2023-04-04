@@ -49,20 +49,38 @@ class DashboardItem {
         </header>
         <div class="tracking-card__body">
           <div class="tracking-card__time">${current}hrs</div>
-          <div class="tracking-card__prev">Last ~${
+          <div class="tracking-card__prev">Last ${
             DashboardItem.PERIODS[this.view]
-          } ${previous}</div>
+          } ${previous}hrs</div>
         </div>
       </article>
     </div>
     `
     );
     this.time = this.container.querySelector(
-      '.dashboard__item--${id} .tracking-card__time'
+      `.dashboard__item--${id} .tracking-card__time`
     );
     this.prev = this.container.querySelector(
-      '.dashboard__item--${id} .tracking-card__prev'
+      `.dashboard__item--${id} .tracking-card__prev`
     );
+  }
+
+  changeView(view) {
+    try {
+      console.log(view);
+      this.view = view.toLowerCase();
+      const { current, previous } = timeframes[this.view];
+      this.time.innerText = `${current}hrs`;
+      this.prev.innerText = `Last ${
+        DashboardItem.PERIODS[this.view]
+      } ${previous}hrs`;
+      console.log('COMPLETE');
+    } catch (error) {
+      console.warn(error);
+      // console.log(this.view);
+      // console.log('Current', current);
+      // console.log('Prev', previous);
+    }
   }
 }
 
@@ -70,6 +88,21 @@ document.addEventListener('DOMContentLoaded', () => {
   getData()
     .then((data) => {
       const activities = data.map((activity) => new DashboardItem(activity));
+      const selectors = document.querySelectorAll('.person__selector__item');
+      // console.log(selectors);
+      selectors.forEach((selector) =>
+        selector.addEventListener('click', function () {
+          selectors.forEach((sel) =>
+            sel.classList.remove('.person__selector__item__active')
+          );
+          selector.classList.add('.person__selector__item__active');
+          const currentView = selector.innerText.trim().toLowerCase();
+          activities.forEach((activity) => {
+            console.log(activity);
+            activity.changeView(currentView);
+          });
+        })
+      );
     })
     .catch((error) => console.warn(error));
 });

@@ -12,6 +12,7 @@
   --blue-400: hsl(246, 80%, 60%);
   --blue-500: hsl(235, 46%, 20%);
   --blue-600: hsl(226, 43%, 10%);
+  --blue-hover: hsl(235, 45%, 31%);
   --red-100: hsl(15, 100%, 70%);
   --red-200: hsl(348, 100%, 68%);
   --green-100: hsl(145, 58%, 55%);
@@ -146,7 +147,7 @@ body {
 }
 
 .dashboard__item:hover .tracking-card {
-  background-color: var(--blue-300);
+  background-color: var(--blue-hover);
   cursor: pointer;
 }
 
@@ -165,7 +166,7 @@ body {
   justify-content: space-between;
 }
 
-.tracking-cardf__header {
+.tracking-card__header {
   margin-bottom: 1rem;
 }
 .tracking-card__title {
