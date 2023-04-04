@@ -6,12 +6,13 @@
 
 :root {
   /* color */
-  --blue-100: hsl(195, 74%, 62%);
-  --blue-200: hsl(236, 100%, 87%);
+  --blue-100: hsl(236, 100%, 87%);
+  --blue-200: hsl(195, 74%, 62%);
   --blue-300: hsl(235, 45%, 61%);
   --blue-400: hsl(246, 80%, 60%);
   --blue-500: hsl(235, 46%, 20%);
   --blue-600: hsl(226, 43%, 10%);
+  --blue-hover: hsl(235, 45%, 31%);
   --red-100: hsl(15, 100%, 70%);
   --red-200: hsl(348, 100%, 68%);
   --green-100: hsl(145, 58%, 55%);
@@ -27,6 +28,7 @@
 
   /* borders */
   --radii: 1rem;
+  --radii-full: 50%;
 }
 
 body {
@@ -40,15 +42,21 @@ body {
 
 .dashboard {
   min-height: 100vh;
-  padding: 4rem 0.5rem;
+  padding: 2rem 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .dashboard__content {
   width: 100%;
-  max-width: 1440px;
-  display: flex;
+  max-width: 900px;
+  margin: 0 auto;
+
+  display: grid;
+  gap: 1.5rem;
   justify-content: center;
-  padding: 15px;
+  grid-template-columns: repeat(1, minmax(300px, 330px));
 }
 
 .dashboard__person {
@@ -60,10 +68,173 @@ body {
 .info-card {
   background-color: var(--blue-400);
   border-radius: var(--radii);
+  padding: 2rem;
+
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 .info-card__photo {
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
+  border: 3px solid white;
+  border-radius: var(--radii-full);
+}
+
+.info-card__title {
+  font-weight: var(--weight-light);
+  margin: 0.5rem 0 0;
+}
+
+.info-card__subtitle {
+  font-weight: var(--weight-light);
+  margin: 0;
+  font-size: 12px;
+  color: var(--blue-100);
+}
+
+.person__selector {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+}
+
+.person__selector__item {
+  font-size: 16px;
+  color: var(--blue-300);
+  cursor: pointer;
+}
+
+.person__selector__item:hover,
+.person__selector__item__active {
+  color: white;
+}
+
+.dashboard__item {
+  width: 100%;
+  background-color: white;
+  border-radius: var(--radii);
+  padding-top: 2.15rem;
+
+  background-repeat: no-repeat;
+  background-position: 92% -10%;
+}
+
+.dashboard__item-work {
+  background-color: var(--red-100);
+  background-image: url(images/icon-work.svg);
+}
+.dashboard__item-play {
+  background-color: var(--blue-200);
+  background-image: url(images/icon-play.svg);
+}
+.dashboard__item-study {
+  background-color: var(--red-200);
+  background-image: url(images/icon-study.svg);
+}
+.dashboard__item-exercise {
+  background-color: var(--green-100);
+  background-image: url(images/icon-exercise.svg);
+}
+.dashboard__item-social {
+  background-color: var(--violet-100);
+  background-image: url(images/icon-social.svg);
+}
+.dashboard__item-self-care {
+  background-color: var(--orange-100);
+  background-image: url(images/icon-self-care.svg);
+}
+
+.dashboard__item:hover .tracking-card {
+  background-color: var(--blue-hover);
+  cursor: pointer;
+}
+
+.tracking-card {
+  background-color: var(--blue-500);
+  border-radius: var(--radii);
+  padding: 0 1.25rem 1rem;
+  position: relative;
+  bottom: -2px;
+}
+
+.tracking-card__header,
+.tracking-card__body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tracking-card__header {
+  margin-bottom: 1rem;
+}
+.tracking-card__title {
+  font-size: var(--fs-base);
+  font-weight: var(--weight-normal);
+}
+
+.tracking-card__menu:hover {
+  cursor: pointer;
+}
+
+.tracking-card__time {
+  font-weight: var(--weight-light);
+  font-size: 28px;
+}
+
+.tracking-card__prev {
+  font-weight: var(--weight-light);
+  color: var(--blue-300);
+  font-size: 14px;
+}
+
+@media (min-width: 1024px) {
+  .dashboard__content {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .dashboard__person {
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+  }
+  .info-card {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-grow: 1;
+  }
+  .info-card__photo {
+    margin-bottom: 1.5rem;
+  }
+  .info-card__title {
+    margin: 0;
+    font-size: 30px;
+  }
+  .person__selector {
+    flex-direction: column;
+  }
+  .person__selector__item:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+  .tracking-card__body {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .tracking-card__time {
+    margin-bottom: 0.75rem;
+    font-size: 40px;
+  }
+  .tracking-card__prev {
+    margin-bottom: 0.75rem;
+    font-size: 16px;
+  }
+  .tracking-cardf__header {
+    margin-bottom: 0.75rem;
+  }
 }
