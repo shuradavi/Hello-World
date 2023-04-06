@@ -1,8 +1,8 @@
-async function getData(url = '/data.json') {
+async function getData(url = './data.json') {
   try {
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     return data;
   } catch (error) {
     console.warn('Error >>>', error);
@@ -34,6 +34,7 @@ class DashboardItem {
     const { title, timeframes } = this.data;
     const id = title.toLowerCase().replace(/ /g, '-');
     const { current, previous } = timeframes[this.view.toLowerCase()];
+    console.log('Current - >', current, 'Previous -> ', previous);
     this.container.insertAdjacentHTML(
       'beforeend',
       `
@@ -58,23 +59,21 @@ class DashboardItem {
     `
     );
     this.time = this.container.querySelector(
-      `.dashboard__item--${id} .tracking-card__time`
+      `.dashboard__item-${id} .tracking-card__time`
     );
     this.prev = this.container.querySelector(
-      `.dashboard__item--${id} .tracking-card__prev`
+      `.dashboard__item-${id} .tracking-card__prev`
     );
   }
 
   changeView(view) {
     try {
-      console.log(view);
       this.view = view.toLowerCase();
-      const { current, previous } = timeframes[this.view];
+      const { current, previous } = this.data.timeframes[this.view];
       this.time.innerText = `${current}hrs`;
       this.prev.innerText = `Last ${
         DashboardItem.PERIODS[this.view]
       } ${previous}hrs`;
-      console.log('COMPLETE');
     } catch (error) {
       console.warn(error);
       // console.log(this.view);
@@ -89,16 +88,17 @@ document.addEventListener('DOMContentLoaded', () => {
     .then((data) => {
       const activities = data.map((activity) => new DashboardItem(activity));
       const selectors = document.querySelectorAll('.person__selector__item');
-      // console.log(selectors);
+      console.log(data);
       selectors.forEach((selector) =>
         selector.addEventListener('click', function () {
-          selectors.forEach((sel) =>
-            sel.classList.remove('.person__selector__item__active')
-          );
-          selector.classList.add('.person__selector__item__active');
+          selectors.forEach((sel) => {
+            console.log(sel);
+            sel.classList.remove('person__selector__item__active');
+          });
+          console.log(selector);
+          selector.classList.add('person__selector__item__active');
           const currentView = selector.innerText.trim().toLowerCase();
           activities.forEach((activity) => {
-            console.log(activity);
             activity.changeView(currentView);
           });
         })
