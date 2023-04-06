@@ -34,7 +34,6 @@ class DashboardItem {
     const { title, timeframes } = this.data;
     const id = title.toLowerCase().replace(/ /g, '-');
     const { current, previous } = timeframes[this.view.toLowerCase()];
-    console.log('Current - >', current, 'Previous -> ', previous);
     this.container.insertAdjacentHTML(
       'beforeend',
       `
@@ -88,14 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
     .then((data) => {
       const activities = data.map((activity) => new DashboardItem(activity));
       const selectors = document.querySelectorAll('.person__selector__item');
-      console.log(data);
       selectors.forEach((selector) =>
         selector.addEventListener('click', function () {
           selectors.forEach((sel) => {
-            console.log(sel);
             sel.classList.remove('person__selector__item__active');
           });
-          console.log(selector);
           selector.classList.add('person__selector__item__active');
           const currentView = selector.innerText.trim().toLowerCase();
           activities.forEach((activity) => {
